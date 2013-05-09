@@ -4,6 +4,7 @@ using System.IO;
 
 public class myfirstgui : MonoBehaviour {
 	string username = "uninitialized";
+	public Texture2D logo;
 	
 	string usernameFilePath {
 		get {
@@ -12,7 +13,6 @@ public class myfirstgui : MonoBehaviour {
 	}
 	
 	void Start () {
-		Debug.Log(Screen.width);
 		Debug.Log(Application.persistentDataPath);
 		try {
 			username = File.ReadAllText(usernameFilePath);
@@ -30,7 +30,12 @@ public class myfirstgui : MonoBehaviour {
 			if(GUI.changed) {
 				File.WriteAllText(usernameFilePath, username);
 			}
+			GUILayout.Space(Screen.width - 190);
+			GUILayout.Label((1f/ Time.deltaTime) + "FPS");
 		} GUILayout.EndHorizontal();
+		GUI.DrawTexture(new Rect(0,(Screen.height - (Screen.height* 0.1f)), (Screen.width * 0.1f), (Screen.height * 0.1f)), logo, ScaleMode.ScaleToFit);
+		//GUILayout.BeginArea(new Rect(50,(Screen.height - 300), (Screen.width * 0.1f), (Screen.height * 0.1f)), logo);
+		//GUILayout.EndArea();
 	}
 	
 	void update() {
